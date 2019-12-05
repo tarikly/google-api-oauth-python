@@ -19,6 +19,10 @@ SCOPES = ['https://www.googleapis.com/auth/youtube.readonly']
 
 DOCUMENT_ID = 'PL1eetAVZEtq-R6GdNJS8bomUS7063vzEq'
 
+
+URL='https://www.youtube.com/watch?v='
+
+
 def main():
     """Shows basic usage of the Docs API.
     Prints the title of a sample document.
@@ -58,9 +62,9 @@ def main():
         request = video_list.list_next(request, videos)
 
         for item in items:
-            print(item["snippet"]["title"])
+            print( 'Video title: ', item["snippet"]["title"],  URL + str(item["snippet"]["resourceId"]["videoId"]) )
 
-        sleep(15)
+        sleep(5)
 
 
 
