@@ -20,7 +20,6 @@ SCOPES = ['https://www.googleapis.com/auth/youtube.readonly']
 #DOCUMENT_ID = '195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE'
 
 #DOCUMENT_ID = 'PL1eetAVZEtq-R6GdNJS8bomUS7063vzEq'
-
 DOCUMENT_ID = 'PLbJEo9pUUei4RnMOsgZPZdANqQHWJzHu2'
 
 
@@ -55,28 +54,22 @@ def main():
     # Retrieve the documents contents from the Docs service.
     #document = service.documents().get(documentId=DOCUMENT_ID).execute()
     video_list = service.playlistItems()
-    request = video_list.list(part="snippet", playlistId=DOCUMENT_ID, maxResults=10, fields='items/snippet(title, description, resourceId)')
+    request = video_list.list(part="snippet", playlistId=DOCUMENT_ID, maxResults=10)
 
     #print(json.dumps(document, indent=4))
-
-    lista = []
-
+    #items = {}
 
     while request is not None:
         videos = request.execute()
         items = videos.get("items", [])
+        #items.update(videos.get("items", []))
+
         request = video_list.list_next(request, videos)
-
         for item in items:
-            #print( 'Video title: ', item["snippet"]["title"],  URL + str(item["snippet"]["resourceId"]["videoId"]) )
-            video = {'title': item["snippet"]["title"], 'url': URL + str(item["snippet"]["resourceId"]["videoId"])}
-            lista.append(video)
+            print( 'Video title: ', item["snippet"]["title"],  URL + str(item["snippet"]["resourceId"]["videoId"]) )
+            #sleep(5)
 
-        sleep(2)
 
-    dic = random.choice(lista)
-
-    print(dic["title"], dic["url"])
 
 if __name__ == '__main__':
     main()
