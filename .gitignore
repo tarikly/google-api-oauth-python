@@ -133,6 +133,8 @@ dmypy.json
 client_secrets/
 credentials/
 client_secret.json
+client_secret.json
+client_secrets.json
 
 # token
 token.pickle
