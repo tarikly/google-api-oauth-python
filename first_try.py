@@ -47,17 +47,21 @@ def main():
     # Retrieve the documents contents from the Docs service.
     #document = service.documents().get(documentId=DOCUMENT_ID).execute()
     video_list = service.playlistItems()
-    request = video_list.list(part='snippet', playlistId=DOCUMENT_ID, maxResults=5)
+    request = video_list.list(part="snippet", playlistId=DOCUMENT_ID, maxResults=10)
 
     #print(json.dumps(document, indent=4))
 
+
     while request is not None:
         videos = request.execute()
+        items = videos.get("items", [])
         request = video_list.list_next(request, videos)
-        print(json.dumps(videos, indent=4, ensure_ascii=False))
+
+        for item in items:
+            print(item["snippet"]["title"])
+
         sleep(15)
 
-    #print('The title of the document is: {}'.format(document.get('title')))
 
 
 if __name__ == '__main__':
