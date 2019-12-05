@@ -130,6 +130,8 @@ dmypy.json
 
 
 # credentials
+
+client_secret*
 client_secrets/
 credentials/
 client_secret.json
